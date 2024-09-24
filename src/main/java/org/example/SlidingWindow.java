@@ -1,6 +1,8 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SlidingWindow {
     public static void main(String[] args) {
@@ -8,6 +10,8 @@ public class SlidingWindow {
         System.out.println("Print max sum of a sub array : " + maxSubArray(new int[]{1, 3, 3, 4, 3, 5, 1}, 4));
         System.out.println("Print max sum of a sub array optimal : " + maxSubArray(new int[]{1, 3, 3, 4, 3, 5, 1}, 4));
         System.out.println("Print start & end index of max sum of a sub array : " + Arrays.toString(indexOfMaxSubArray(new int[]{1, 3, 3, 4, 3, 5, 1}, 4)));
+        System.out.println("Longest sub array whose sum <= K : " + longestSubArray(new int[]{1, 3, 3, 4, 3, 5, 1}, 10));
+
     }
 
     //    Find the maximum sum of a subarray of size K.
@@ -48,8 +52,6 @@ public class SlidingWindow {
 
     //    Return index of start and end of the maximum sum of a subarray of size K.
     //    Optimal approach
-
-
     private static int[] indexOfMaxSubArray(int[] nums, int size) {
         int sum = 0;
         int maxSum = 0;
@@ -68,6 +70,25 @@ public class SlidingWindow {
             }
         }
         return new int[]{start, end};
+    }
+
+    //    Longest sub array with the sum <= k
+    private static List<Integer> longestSubArray(int[] nums, int maxSum) {
+        int sum = 0;
+        List<Integer> currentArray = new ArrayList<>();
+        List<Integer> longestArray = new ArrayList<>();
+        for (int num : nums) {
+            sum += num;
+            currentArray.add(num);
+            while (sum > maxSum) {
+                sum -= currentArray.get(0);
+                currentArray.remove(0);
+            }
+            if (currentArray.size() > longestArray.size()) {
+                longestArray = new ArrayList<>(currentArray);
+            }
+        }
+        return longestArray;
     }
 
 }
