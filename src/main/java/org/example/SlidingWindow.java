@@ -6,12 +6,12 @@ import java.util.List;
 
 public class SlidingWindow {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
         System.out.println("Print max sum of a sub array : " + maxSubArray(new int[]{1, 3, 3, 4, 3, 5, 1}, 4));
-        System.out.println("Print max sum of a sub array optimal : " + maxSubArray(new int[]{1, 3, 3, 4, 3, 5, 1}, 4));
+        System.out.println("Print max sum of a sub array optimal : " + maxSubArrayOptimal(new int[]{1, 3, 3, 4, 3, 5, 1}, 4));
         System.out.println("Print start & end index of max sum of a sub array : " + Arrays.toString(indexOfMaxSubArray(new int[]{1, 3, 3, 4, 3, 5, 1}, 4)));
         System.out.println("Longest sub array whose sum <= K : " + longestSubArray(new int[]{1, 3, 3, 4, 3, 5, 1}, 10));
-
+        int[] nums = {1, 2, 3, 4, 5, 6, 1};
+        System.out.println("Maximum sum of cards : " + maximumPoints(nums, 3));
     }
 
     //    Find the maximum sum of a subarray of size K.
@@ -91,4 +91,24 @@ public class SlidingWindow {
         return longestArray;
     }
 
+    //    Maximum points can be obtained from k no of elements as a sub array
+    private static int maximumPoints(int[] nums, int size) {
+        int leftSum = 0;
+        int rightSum = 0;
+        int maxSum = 0;
+
+        for (int i = 0; i < size; i++) {
+            leftSum += nums[i];
+        }
+        maxSum = leftSum;
+
+        for (int i = 0; i < size; i++) {
+            leftSum -= nums[size - 1 - i];
+            rightSum += nums[nums.length - 1 - i];
+            if ((leftSum + rightSum) > maxSum) {
+                maxSum = leftSum + rightSum;
+            }
+        }
+        return maxSum;
+    }
 }
