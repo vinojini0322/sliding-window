@@ -12,6 +12,8 @@ public class SlidingWindow {
         System.out.println("Longest sub array whose sum <= K : " + longestSubArray(new int[]{1, 3, 3, 4, 3, 5, 1}, 10));
         int[] nums = {1, 2, 3, 4, 5, 6, 1};
         System.out.println("Maximum sum of cards : " + maximumPoints(nums, 3));
+        String sequence = "abcabcbb";
+        System.out.println("Longest substring without repeating the characters : " + longestUniqueSubString(sequence));
     }
 
     //    Find the maximum sum of a subarray of size K.
@@ -91,7 +93,7 @@ public class SlidingWindow {
         return longestArray;
     }
 
-    //    Maximum points can be obtained from k no of elements as a sub array
+    //    Maximum Points You Can Obtain from Cards
     private static int maximumPoints(int[] nums, int size) {
         int leftSum = 0;
         int rightSum = 0;
@@ -110,5 +112,24 @@ public class SlidingWindow {
             }
         }
         return maxSum;
+    }
+
+    //      Longest substring without repeating the characters
+    private static int longestUniqueSubString(String sequence) {
+        int a = 0;
+        int b = 0;
+        int max = 0;
+        StringBuilder seq = new StringBuilder();
+        while (b < sequence.length()) {
+            if (seq.toString().contains(String.valueOf(sequence.charAt(b)))) {
+                seq.deleteCharAt(0);
+                a++;
+            } else {
+                seq.append(sequence.charAt(b));
+                b++;
+            }
+            max = Math.max(max, seq.length());
+        }
+        return max;
     }
 }
