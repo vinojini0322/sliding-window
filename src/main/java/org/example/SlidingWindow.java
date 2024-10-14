@@ -133,27 +133,26 @@ public class SlidingWindow {
         return max;
     }
 
-    //    Maximum consecutive ones in an array
-//    private static int maxConsecutiveOnes(int[] arr) {
-//        int a = 0;
-//        int b = 0;
-//        int maxLength = 0;
-//        int zeros = 2;
-//
-//        while (zeros < 0) {
-//            for(int n : arr){
-//                if(n==0){
-//
-//                }
-//            }
-//
-//        }
-//
-//
-//    }
+    //    Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array
+    //    such that nums[i] == nums[j] and abs(i - j) <= k
+    //    Leetcode 219
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (j - i <= k) {
+                    if (nums[j] == nums[i]) {
+                        return true;
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+        return false;
+    }
 
     //    Given an array fruits where each element represents a type of fruit,
-//    you need to find the maximum number of fruits you can collect in the two baskets
+    //    you need to find the maximum number of fruits you can collect in the two baskets
     private int maxFruitsInBasket(int[] arr) {
 
         int firstLeft = -1;
