@@ -132,4 +132,54 @@ public class SlidingWindow {
         }
         return max;
     }
+
+    //    Maximum consecutive ones in an array
+//    private static int maxConsecutiveOnes(int[] arr) {
+//        int a = 0;
+//        int b = 0;
+//        int maxLength = 0;
+//        int zeros = 2;
+//
+//        while (zeros < 0) {
+//            for(int n : arr){
+//                if(n==0){
+//
+//                }
+//            }
+//
+//        }
+//
+//
+//    }
+
+    //    Given an array fruits where each element represents a type of fruit,
+//    you need to find the maximum number of fruits you can collect in the two baskets
+    private int maxFruitsInBasket(int[] arr) {
+
+        int firstLeft = -1;
+        int secondLeft = -1;
+        int newLeftCount = -1;
+        int currentMax = 0;
+        int max = 0;
+
+        for (int a : arr) {
+            if (a == firstLeft || a == secondLeft) {
+                currentMax = +1;
+            } else {
+                currentMax = newLeftCount + 1;
+            }
+            if (a == firstLeft) {
+                newLeftCount += 1;
+            } else {
+                newLeftCount = 1;
+            }
+            if (a != firstLeft) {
+                secondLeft = firstLeft;
+                firstLeft = a;
+            }
+            max = Math.max(currentMax, max);
+        }
+
+        return max;
+    }
 }
